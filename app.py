@@ -1,4 +1,4 @@
-from tkinter import *
+import tkinter as tk
 import tkinter.font
 from functools import partial
 
@@ -10,27 +10,22 @@ relayPins = [14, 15, 17, 18, 27, 22, 23, 24]
 GPIO.setmode(GPIO.BCM)
 
 for i in range(8):
-	GPIO.setup(relayPins[i], GPIO.OUT)
+    GPIO.setup(relayPins[i], GPIO.OUT)
 
-## CONNECT BLUETOOTH ##
-# Tutorial 1: http://www.python-exemplary.com/index_en.php?inhalt_links=navigation_en.inc.php&inhalt_mitte=raspi/en/bluetooth.inc.php
-
-# Or try PyBlueZ
-# https://people.csail.mit.edu/albert/bluez-intro/c212.html
 
 ## TOGGLE VARIABLES ##
 control = [True, True, True, True, True, True, True, True];
 names = ["Basen", "Oczko", "Wtyczka_1", "Wtyczka_2", "Wtyczka_3", "Wtyczka_4", "Wtyczka_5", "Wtyczka_6"]
-fullScreen = False;
+fullscreen = False;
 
 ## GUI Settings ##
-root = Tk()
+root = tk.Tk()
 root.title("Automatyczny Ogrod")
 font = tkinter.font.Font(family = "Helvetica", size = 12, weight = "bold")
 w=root.winfo_screenwidth()
 h=root.winfo_screenheight()
 root.geometry("%dx%d+0+0" % (w, h))
-root.attributes("-fullscreen", fullScreen)
+root.attributes("-fullscreen", False)
 
 ## EVENT FUNCTIONS ##
 def toggle(i):
@@ -42,17 +37,23 @@ def toggle(i):
         control[i] = True
         buttons[i]["text"] = "Wylacz " + names[i]
         GPIO.output(relayPins[i], GPIO.HIGH)
+
 def close():
     RPi.GPIO.cleanup();
     root.destroy()
+    
 def fullscreenToggle():
-	fullScreen = not fullScreen
-    root.attributes("-fullscreen", fullScreen)
+    if fullscreen:
+        fullscreen = not fullscreen
+        root.attributes("-fullscreen", False)
+    else:
+        fullscreen = not fullscreen
+        root.attributes("-fullscreen", True)
 
 ## WIDGETS ##
 buttons = []
 for i in range(8):
-    button = Button(root, text = names[i], font=font, bg = "lightblue", height = h//5//10, width = w//4//10)
+    button = tk.Button(root, text = names[i], font=font, bg = "lightblue", height = h//5//10, width = w//4//10)
     buttons.append(button)
     toggle(i)
     buttons[i]["command"] = partial(toggle, i)
@@ -61,12 +62,12 @@ for i in range(8):
     else:
         button.grid(row = 4, column = i - 4)
 
-exitButton =   Button(root, text = "Zakoncz", command = close, font=font, bg = "red", height = 1, width = w//4//10)
+exitButton = tk.Button(root, text = "Zakoncz", command = close, font=font, bg = "red", height = 1, width = w//4//10)
 exitButton.grid(row = 5, column = 3)
 
-fullScreenButton = Button(root, text = "Pelen Ekran", command = fullscreenToggle, font=font, bg = "red", height = 1, width = w//4//10)
-fullScreenButton.grid(row = 5, column = 0)
+#fullScreenButton = tk.Button(root, text = "Pelen Ekran", command = fullscreenToggle, font=font, bg = "red", height = 1, width = w//4//10)
+#fullScreenButton.grid(row = 5, column = 0)
 
 root.protocol("WM_DELETE_WINDOW", close) # exit cleanly
 
-#root.mainLoop()
+root.mainloop()

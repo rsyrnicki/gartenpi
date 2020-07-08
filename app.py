@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter.font
 from functools import partial
 
-import RPi.GPIO
+import RPi.GPIO as GPIO
 
 ## Hardware ##
 # 8 10 11 12 13 15 16 18

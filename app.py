@@ -21,7 +21,7 @@ for i in range(8):
 ## TOGGLE VARIABLES ##
 control = [True, True, True, True, True, True, True, True];
 names = ["Basen", "Oczko", "Wtyczka_1", "Wtyczka_2", "Wtyczka_3", "Wtyczka_4", "Wtyczka_5", "Wtyczka_6"]
-fullScreen = True;
+fullScreen = False;
 
 ## GUI Settings ##
 root = Tk()
@@ -30,7 +30,7 @@ font = tkinter.font.Font(family = "Helvetica", size = 12, weight = "bold")
 w=root.winfo_screenwidth()
 h=root.winfo_screenheight()
 root.geometry("%dx%d+0+0" % (w, h))
-root.attributes("-fullscreen", True)
+root.attributes("-fullscreen", fullScreen)
 
 ## EVENT FUNCTIONS ##
 def toggle(i):
@@ -45,7 +45,9 @@ def toggle(i):
 def close():
     RPi.GPIO.cleanup();
     root.destroy()
-        
+def fullscreenToggle():
+	fullScreen = not fullScreen
+    root.attributes("-fullscreen", fullScreen)
 
 ## WIDGETS ##
 buttons = []
@@ -61,6 +63,9 @@ for i in range(8):
 
 exitButton =   Button(root, text = "Zakoncz", command = close, font=font, bg = "red", height = 1, width = w//4//10)
 exitButton.grid(row = 5, column = 3)
+
+fullScreenButton = Button(root, text = "Pelen Ekran", command = fullscreenToggle, font=font, bg = "red", height = 1, width = w//4//10)
+fullScreenButton.grid(row = 5, column = 0)
 
 root.protocol("WM_DELETE_WINDOW", close) # exit cleanly
 

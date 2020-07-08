@@ -2,12 +2,15 @@ from tkinter import *
 import tkinter.font
 from functools import partial
 
-#import RPi.GPIO
-#RPi.GPIO.setmode(RPi.GPIO.BCM)
+import RPi.GPIO
 
 ## Hardware ##
-# 8 10 11 12 13 15 16
-s = [14, 15, 17, 18, 27, 22, 23]
+# 8 10 11 12 13 15 16 18
+relayPins = [14, 15, 17, 18, 27, 22, 23, 24]
+RPi.GPIO.setmode(RPi.GPIO.BCM)
+
+for i in range(8):
+	GPIO.setup(relayPins[i], GPIO.OUT)
 
 ## CONNECT BLUETOOTH ##
 # Tutorial 1: http://www.python-exemplary.com/index_en.php?inhalt_links=navigation_en.inc.php&inhalt_mitte=raspi/en/bluetooth.inc.php
@@ -34,12 +37,13 @@ def toggle(i):
     if control[i]:
         control[i] = False
         buttons[i]["text"] = "Wlacz " + names[i]
-        #
+        GPIO.output(relayPins[i], GPIO.LOW)
     else:
         control[i] = True
         buttons[i]["text"] = "Wylacz " + names[i]
+        GPIO.output(relayPins[i], GPIO.HIGH)
 def close():
-    #RPi.GPIO.cleanup();
+    RPi.GPIO.cleanup();
     root.destroy()
         
 

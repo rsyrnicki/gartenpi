@@ -39,7 +39,7 @@ def toggle(i):
         GPIO.output(relayPins[i], GPIO.HIGH)
 
 def close():
-    RPi.GPIO.cleanup();
+    GPIO.cleanup();
     root.destroy()
     
 def fullscreenToggle():

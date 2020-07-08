@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 ## Hardware ##
 # 8 10 11 12 13 15 16 18
 relayPins = [14, 15, 17, 18, 27, 22, 23, 24]
-RPi.GPIO.setmode(RPi.GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 
 for i in range(8):
 	GPIO.setup(relayPins[i], GPIO.OUT)

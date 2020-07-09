@@ -32,11 +32,11 @@ def toggle(i):
     if control[i]:
         control[i] = False
         buttons[i]["text"] = "Wlacz " + names[i]
-        GPIO.output(relayPins[i], GPIO.LOW)
+        GPIO.output(relayPins[i], GPIO.HIGH)
     else:
         control[i] = True
         buttons[i]["text"] = "Wylacz " + names[i]
-        GPIO.output(relayPins[i], GPIO.HIGH)
+        GPIO.output(relayPins[i], GPIO.LOW)
 
 def close():
     GPIO.cleanup();

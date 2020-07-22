@@ -63,6 +63,7 @@ exitButton.grid(row = 5, column = 3)
 
 root.protocol("WM_DELETE_WINDOW", close) # exit cleanly
 
+# Potentiall error, because I don't fully understand how it works
 def runGUI():
 	while True:
 		tk.update_idletasks()

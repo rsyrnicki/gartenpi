@@ -78,7 +78,7 @@ root.protocol("WM_DELETE_WINDOW", close) # exit cleanly
 
 while 1:
 	t = time.localtime()
-	minutes = time.strftime("%M", t)
+	minutes = int(time.strftime("%M", t))
 	seconds = int(time.strftime("%S", t))
 	if (seconds%5 == 0):
 		button[1].invoke()

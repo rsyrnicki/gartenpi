@@ -2,6 +2,8 @@ import tkinter as tk
 import tkinter.font
 from functools import partial
 
+import time
+
 import RPi.GPIO as GPIO
 
 ## Hardware ##
@@ -16,16 +18,16 @@ for i in range(8):
 ## TOGGLE VARIABLES ##
 control = [True, True, True, True, True, True, True, True];
 names = ["Basen", "Oczko", "Wtyczka_1", "Wtyczka_2", "Wtyczka_3", "Wtyczka_4", "Wtyczka_5", "Wtyczka_6"]
-fullscreen = False;
+#fullscreen = False;
 
 ## GUI Settings ##
 root = tk.Tk()
 root.title("Automatyczny Ogrod")
-font = tkinter.font.Font(family = "Helvetica", size = 14, weight = "bold")
+font = tkinter.font.Font(family = "Helvetica", size = 12, weight = "bold")
 w=root.winfo_screenwidth()
 h=root.winfo_screenheight()
 root.geometry("%dx%d+0+0" % (w, h))
-root.attributes("-fullscreen", False)
+#root.attributes("-fullscreen", False)
 
 ## EVENT FUNCTIONS ##
 def toggle(i):
@@ -33,24 +35,26 @@ def toggle(i):
         control[i] = False
         buttons[i]["text"] = "Wlacz " + names[i]
         buttons[i]["bg"] = "red"
+        buttons[i]["activeforeground"] = "red"
         GPIO.output(relayPins[i], GPIO.HIGH)
     else:
         control[i] = True
         buttons[i]["text"] = "Wylacz " + names[i]
         buttons[i]["bg"] = "green"
+        buttons[i]["activeforeground"] = "green"
         GPIO.output(relayPins[i], GPIO.LOW)
 
 def close():
     GPIO.cleanup();
     root.destroy()
     
-def fullscreenToggle():
-    if fullscreen:
-        fullscreen = not fullscreen
-        root.attributes("-fullscreen", False)
-    else:
-        fullscreen = not fullscreen
-        root.attributes("-fullscreen", True)
+#def fullscreenToggle():
+#    if fullscreen:
+#        fullscreen = not fullscreen
+#        root.attributes("-fullscreen", False)
+#    else:
+#        fullscreen = not fullscreen
+#        root.attributes("-fullscreen", True)
 
 ## WIDGETS ##
 buttons = []
@@ -72,4 +76,12 @@ exitButton.grid(row = 5, column = 3)
 
 root.protocol("WM_DELETE_WINDOW", close) # exit cleanly
 
-root.mainloop()
+while 1:
+	t = time.localtime()
+	minutes = time.strftime("%M", t)
+	seconds = int(time.strftime("%S", t))
+	if (seconds%5 == 0):
+		button[1].invoke()
+	if (minutes%15 == 0):
+		button[0].invoke();
+	root.mainloop()

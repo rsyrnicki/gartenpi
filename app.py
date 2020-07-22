@@ -21,7 +21,7 @@ fullscreen = False;
 ## GUI Settings ##
 root = tk.Tk()
 root.title("Automatyczny Ogrod")
-font = tkinter.font.Font(family = "Helvetica", size = 32, weight = "bold")
+font = tkinter.font.Font(family = "Helvetica", size = 14, weight = "bold")
 w=root.winfo_screenwidth()
 h=root.winfo_screenheight()
 root.geometry("%dx%d+0+0" % (w, h))
@@ -55,7 +55,7 @@ def fullscreenToggle():
 ## WIDGETS ##
 buttons = []
 for i in range(8):
-    button = tk.Button(root, text = names[i], font=font, bg = "lightblue", height = h//5//10, width = w//4//10)
+    button = tk.Button(root, text = names[i], font=font, bg = "red", height = h//5//10, width = w//4//10)
     buttons.append(button)
     toggle(i)
     buttons[i]["command"] = partial(toggle, i)

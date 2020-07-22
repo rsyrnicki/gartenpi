@@ -18,7 +18,6 @@ for i in range(8):
 ## TOGGLE VARIABLES ##
 control = [True, True, True, True, True, True, True, True];
 names = ["Basen", "Oczko", "Wtyczka_1", "Wtyczka_2", "Wtyczka_3", "Wtyczka_4", "Wtyczka_5", "Wtyczka_6"]
-#fullscreen = False;
 
 ## GUI Settings ##
 root = tk.Tk()
@@ -27,7 +26,6 @@ font = tkinter.font.Font(family = "Helvetica", size = 12, weight = "bold")
 w=root.winfo_screenwidth()
 h=root.winfo_screenheight()
 root.geometry("%dx%d+0+0" % (w, h))
-#root.attributes("-fullscreen", False)
 
 ## EVENT FUNCTIONS ##
 def toggle(i):
@@ -48,14 +46,6 @@ def close():
     GPIO.cleanup();
     root.destroy()
     
-#def fullscreenToggle():
-#    if fullscreen:
-#        fullscreen = not fullscreen
-#        root.attributes("-fullscreen", False)
-#    else:
-#        fullscreen = not fullscreen
-#        root.attributes("-fullscreen", True)
-
 ## WIDGETS ##
 buttons = []
 for i in range(8):
@@ -71,17 +61,16 @@ for i in range(8):
 exitButton = tk.Button(root, text = "Zakoncz", command = close, font=font, bg = "red", height = 1, width = w//4//10)
 exitButton.grid(row = 5, column = 3)
 
-#fullScreenButton = tk.Button(root, text = "Pelen Ekran", command = fullscreenToggle, font=font, bg = "red", height = 1, width = w//4//10)
-#fullScreenButton.grid(row = 5, column = 0)
-
 root.protocol("WM_DELETE_WINDOW", close) # exit cleanly
 
-while 1:
+while True:
 	t = time.localtime()
+	hours = int(time.striftime("%H", t)
 	minutes = int(time.strftime("%M", t))
 	seconds = int(time.strftime("%S", t))
 	if (seconds%5 == 0):
 		button[1].invoke()
-	if (minutes%15 == 0):
+	if (minutes%15 == 0 && hours >= 8 && hours <= 21):
 		button[0].invoke();
-	root.mainloop()
+	tk.update_idletasks()
+	tk.update()

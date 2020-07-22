@@ -21,7 +21,7 @@ fullscreen = False;
 ## GUI Settings ##
 root = tk.Tk()
 root.title("Automatyczny Ogrod")
-font = tkinter.font.Font(family = "Helvetica", size = 12, weight = "bold")
+font = tkinter.font.Font(family = "Helvetica", size = 32, weight = "bold")
 w=root.winfo_screenwidth()
 h=root.winfo_screenheight()
 root.geometry("%dx%d+0+0" % (w, h))
@@ -32,10 +32,12 @@ def toggle(i):
     if control[i]:
         control[i] = False
         buttons[i]["text"] = "Wlacz " + names[i]
+        buttons[i]["bg"] = "red"
         GPIO.output(relayPins[i], GPIO.HIGH)
     else:
         control[i] = True
         buttons[i]["text"] = "Wylacz " + names[i]
+        buttons[i]["bg"] = "green"
         GPIO.output(relayPins[i], GPIO.LOW)
 
 def close():

@@ -35,8 +35,8 @@ class timerThread (threading.Thread):
       print ("Exiting " + self.name)
 
 # Create new threads
-threadTimer1 = timerThread(2, "Thread-2", 2, appCore.buttons[0], 8, 21, 15)
-threadTimer2 = timerThread(3, "Thread-3", 3, appCore.buttons[1], 0, 24, 2)
+threadTimer1 = timerThread(1, "Thread-1", 1, appCore.buttons[0], 8, 21, 15)
+threadTimer2 = timerThread(2, "Thread-2", 2, appCore.buttons[1], 0, 24, 2)
 
 # Start new Threads
 #threadGUI.start()

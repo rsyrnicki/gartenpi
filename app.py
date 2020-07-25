@@ -25,23 +25,27 @@ class timerThread (threading.Thread):
       self.threadID = threadID
       self.name = name
       self.counter = counter
+      self.btn = btn
+      self.start = start
+      self.stop = stop
+      self.interv = interv
    def run(self):
       print ("Starting " + self.name)
-      appTimers.timedToggles(btn, start, stop, interv)
+      appTimers.timedToggles(self.btn, self.start, self.stop, self.interv)
       print ("Exiting " + self.name)
 
-
+appCore.runGUI()
 
 # Create new threads
-threadGUI = guiThread(1, "Thread-1", 1)
+#threadGUI = guiThread(1, "Thread-1", 1)
 threadTimer1 = timerThread(2, "Thread-2", 2, appCore.buttons[0], 8, 21, 15)
 threadTimer1 = timerThread(3, "Thread-3", 3, appCore.buttons[1], 0, 24, 2)
 
 # Start new Threads
-threadGUI.start()
+#threadGUI.start()
 threadTimer1.start()
 threadTimer2.start()
-threadGUI.join()
+#threadGUI.join()
 threadTimer1.join()
 threadTimer2.join()
 print ("Exiting Main Thread")

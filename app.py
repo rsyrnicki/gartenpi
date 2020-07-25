@@ -1,7 +1,7 @@
 import appCore
 import appTimers
 
-import thread
+import _thread
 
 try:
 	# Start Threads

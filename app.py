@@ -31,7 +31,7 @@ class timerThread (threading.Thread):
       self.interv = interv
    def run(self):
       print ("Starting " + self.name)
-      appTimers.timedToggles(self.btn, self.start, self.stop, self.interv)
+      appTimers.timedToggles(self.name, self.btn, self.start, self.stop, self.interv)
       print ("Exiting " + self.name)
 
 # Create new threads

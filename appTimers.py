@@ -5,7 +5,7 @@ def timedToggles(threadName, button, startH, endH, interval):
 	toggled = True
 	
 	while True:
-		if exitFlag:
+		if appCore.exitFlag:
 			threadName.exit()
 		t = time.localtime()
 		hours = int(time.striftime("%H", t))

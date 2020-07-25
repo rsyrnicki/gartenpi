@@ -34,12 +34,9 @@ class timerThread (threading.Thread):
       appTimers.timedToggles(self.btn, self.start, self.stop, self.interv)
       print ("Exiting " + self.name)
 
-appCore.runGUI()
-
 # Create new threads
-#threadGUI = guiThread(1, "Thread-1", 1)
 threadTimer1 = timerThread(2, "Thread-2", 2, appCore.buttons[0], 8, 21, 15)
-threadTimer1 = timerThread(3, "Thread-3", 3, appCore.buttons[1], 0, 24, 2)
+threadTimer2 = timerThread(3, "Thread-3", 3, appCore.buttons[1], 0, 24, 2)
 
 # Start new Threads
 #threadGUI.start()
@@ -48,4 +45,7 @@ threadTimer2.start()
 #threadGUI.join()
 threadTimer1.join()
 threadTimer2.join()
+
+appCore.runGUI()
+
 print ("Exiting Main Thread")

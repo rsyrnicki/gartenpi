@@ -13,8 +13,10 @@ def timedToggles(button, startH, endH, interval):
 		if (minutes%interval == 0 and hours >= startH and hours <= endH and not toggled):
 			button.invoke()
 			toggled = True
+			print("Invoked a button!")
 		# Potentiall error, because I might have messed something up
 		elif (minutes%interval == 0 and hours >= startH and hours <= endH and toggled):
 			toggled = True
 		else:
 			toggled = False
+		time.wait(15)

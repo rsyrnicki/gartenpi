@@ -13,7 +13,7 @@ relayPins = [14, 15, 17, 18, 27, 22, 23, 24]
 GPIO.setmode(GPIO.BCM)
 
 for i in range(8):
-    GPIO.setup(relayPins[i], GPIO.OUT)
+	GPIO.setup(relayPins[i], GPIO.OUT)
 
 
 ## TOGGLE VARIABLES ##
@@ -44,24 +44,24 @@ def toggle(i):
         buttons[i]["bg"] = "green"
         buttons[i]["activebackground"] = "green"
         GPIO.output(relayPins[i], GPIO.LOW)
-        
+    
 def close():
 	GPIO.cleanup();
-    root.destroy()
-    sys.exit()
+	root.destroy()
+	sys.exit()
  
        
 ## WIDGETS ##
 buttons = []
 for i in range(8):
-    button = tk.Button(root, text = names[i], font=font, bg = "red", height = 9, width = 17)
-    buttons.append(button)
-    toggle(i)
-    buttons[i]["command"] = partial(toggle, i)
-    if (i <= 3):
-        button.grid(row = 2, column = i)
-    else:
-        button.grid(row = 4, column = i - 4)
+	button = tk.Button(root, text = names[i], font=font, bg = "red", height = 9, width = 17)
+	buttons.append(button)
+	toggle(i)
+	buttons[i]["command"] = partial(toggle, i)
+	if (i <= 3):
+		button.grid(row = 2, column = i)
+	else:
+		button.grid(row = 4, column = i - 4)
 
 exitButton = tk.Button(root, text = "Zakoncz", command = close, font=font, bg = "red", height = 1, width = 17)
 exitButton.grid(row = 5, column = 3)

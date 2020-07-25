@@ -1,10 +1,12 @@
 import appCore
 import time
 
-def timedToggles(button, startH, endH, interval):
+def timedToggles(threadName, button, startH, endH, interval):
 	toggled = True
 	
 	while True:
+		if exitFlag:
+			threadName.exit()
 		t = time.localtime()
 		hours = int(time.striftime("%H", t))
 		minutes = int(time.strftime("%M", t))

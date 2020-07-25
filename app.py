@@ -10,7 +10,7 @@ exitFlag = 0
 
 class timerThread (threading.Thread):
    #def __init__(self, threadID, name, counter, btn, start, stop, interv):
-	def __init__(self, threadID, name, counter, btn, start, stop, interv):
+	def __init__(self, threadID, name, counter):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
 		self.name = name

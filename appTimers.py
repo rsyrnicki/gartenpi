@@ -10,11 +10,11 @@ def timedToggles(button, startH, endH, interval):
 		minutes = int(time.strftime("%M", t))
 		seconds = int(time.strftime("%S", t))
 		# Potentiall error, because I might have messed something up
-		if (minutes%interval == 0 AND hours >= startH AND hours <= endH AND !toggled):
+		if (minutes%interval == 0 and hours >= startH and hours <= endH and not toggled):
 			button.invoke()
 			toggled = True
 		# Potentiall error, because I might have messed something up
-		elif (minutes%interval == 0 AND hours >= startH AND hours <= endH AND toggled):
+		elif (minutes%interval == 0 and hours >= startH and hours <= endH and toggled):
 			toggled = True
 		else:
 			toggled = False

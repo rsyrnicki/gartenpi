@@ -46,7 +46,7 @@ def toggle(i):
         #GPIO.output(relayPins[i], GPIO.LOW)
         
 def close():
-	#GPIO.cleanup();
+    #GPIO.cleanup();
     root.destroy()
     sys.exit()
  
@@ -71,50 +71,50 @@ root.protocol("WM_DELETE_WINDOW", close) # exit cleanly
 
 ## TIMER FUNCTION ##
 def timedToggles(threadName, button, startH, endH, interval):
-	toggled = True
-	
-	while True:
-		print("Timer Thread")
-		global exitFlag
-		hours = int(time.localtime()[3])
-		minutes = int(time.localtime()[4])
-		seconds = int(time.localtime()[5])
-		if (minutes%interval == 0 and hours >= startH and hours <= endH and not toggled):
-			button.invoke()
-			toggled = True
-			print("A button has been pressed automaticaly!")
-		elif (minutes%interval == 0 and hours >= startH and hours <= endH and toggled):
-			toggled = True
-		else:
-			toggled = False
-		time.sleep(30)
-		
-		
+    toggled = True
+    
+    while True:
+        print("Timer Thread")
+        global exitFlag
+        hours = int(time.localtime()[3])
+        minutes = int(time.localtime()[4])
+        seconds = int(time.localtime()[5])
+        if (minutes%interval == 0 and hours >= startH and hours <= endH and not toggled):
+            button.invoke()
+            toggled = True
+            print("A button has been pressed automaticaly!")
+        elif (minutes%interval == 0 and hours >= startH and hours <= endH and toggled):
+            toggled = True
+        else:
+            toggled = False
+        time.sleep(30)
+        
+        
 ## MULTITHREADING ##
 class timer1Thread (threading.Thread):
-	def __init__(self, threadID, name, counter):
-		threading.Thread.__init__(self)
-		self.threadID = threadID
-		self.name = name
-		self.counter = counter
-	def run(self):
-		print ("Starting " + self.name)
-		timedToggles(self.name, buttons[0], 8, 21, 15)
-		print ("Exiting " + self.name)
+    def __init__(self, threadID, name, counter):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.counter = counter
+    def run(self):
+        print ("Starting " + self.name)
+        timedToggles(self.name, buttons[0], 8, 21, 15)
+        print ("Exiting " + self.name)
 
 print("Loading classes")
 
 class timer2Thread (threading.Thread):
-	def __init__(self, threadID, name, counter):
-		threading.Thread.__init__(self)
-		self.threadID = threadID
-		self.name = name
-		self.counter = counter
-	def run(self):
-		print ("Starting " + self.name)
-		timedToggles(self.name, buttons[1], 8, 22, 1)
-		print ("Exiting " + self.name)
-		
+    def __init__(self, threadID, name, counter):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.counter = counter
+    def run(self):
+        print ("Starting " + self.name)
+        timedToggles(self.name, buttons[1], 8, 22, 1)
+        print ("Exiting " + self.name)
+        
 # Create new threads
 threadTimer1 = timer1Thread(1, "Thread-1", 1)
 threadTimer2 = timer2Thread(2, "Thread-2", 2)

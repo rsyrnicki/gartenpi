@@ -54,7 +54,7 @@ def close():
 ## WIDGETS ##
 buttons = []
 for i in range(8):
-    button = tk.Button(root, text = names[i], font=font, bg = "red", height = 9, width = 17)
+    button = tk.Button(root, text = names[i], font=font, bg = "red", height = 5, width = 9)
     buttons.append(button)
     toggle(i)
     buttons[i]["command"] = partial(toggle, i)
@@ -63,7 +63,7 @@ for i in range(8):
     else:
         button.grid(row = 4, column = i - 4)
 
-exitButton = tk.Button(root, text = "Zakoncz", command = close, font=font, bg = "red", height = 1, width = 17)
+exitButton = tk.Button(root, text = "Zakoncz", command = close, font=font, bg = "red", height = 1, width = 9)
 exitButton.grid(row = 5, column = 3)
 
 root.protocol("WM_DELETE_WINDOW", close) # exit cleanly
